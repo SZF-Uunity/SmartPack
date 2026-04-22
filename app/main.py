@@ -12,7 +12,8 @@ from fastapi.staticfiles import StaticFiles
 from app.api.routes import router
 from app.core.config import settings
 from app.core.logging import setup_logging
-from app.db.session import Base, engine
+from app.db.session import Base, SessionLocal, engine
+from app.services.bootstrap_service import BootstrapService
 
 # 启动时先初始化日志，确保后续启动链路都有日志记录。
 setup_logging()
@@ -55,6 +56,11 @@ def on_startup() -> None:
     """启动事件：创建数据库表结构。"""
 
     Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    try:
+        BootstrapService(db).seed_if_needed()
+    finally:
+        db.close()
     logger.info("系统启动完成：数据库表已就绪")
 
 

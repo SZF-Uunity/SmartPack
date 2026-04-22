@@ -40,6 +40,17 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 - 健康检查：http://127.0.0.1:8000/health
 - 企业控制台：http://127.0.0.1:8000/app
 
+
+## 3.1 前后端联调默认数据（新增）
+
+系统首次启动（空数据库）会自动初始化最小联调数据：
+
+- 默认用户：`sysadmin/admin/packer`（默认密码：`SmartPack@123`）
+- 默认 API Key：`dev-smartpack-key-please-change`
+- 默认客户、材质、箱型、演示产品
+
+> 仅用于本地开发联调，生产环境请立即替换密钥并关闭该能力。
+
 ## 4. 企业级架构说明
 
 项目采用分层结构，强调低耦合与可演进：

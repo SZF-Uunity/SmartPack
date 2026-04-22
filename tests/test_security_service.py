@@ -20,3 +20,9 @@ def test_has_permission_packer_allowed() -> None:
     """验证打包员可以执行装箱计算。"""
 
     assert has_permission(Role.PACKER, "packing:run") is True
+
+
+def test_has_permission_packer_catalog_read() -> None:
+    """验证打包员可读取目录能力，保证 AI 解析链路联调。"""
+
+    assert has_permission(Role.PACKER, "catalog:read") is True

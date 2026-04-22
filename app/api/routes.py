@@ -33,7 +33,7 @@ router = APIRouter()
 def create_api_key(
     payload: ApiKeyCreate,
     db: Session = Depends(get_db),
-    ctx: RequestContext = Depends(require_permission("catalog:write")),
+    ctx: RequestContext = Depends(require_permission("security:manage")),
 ):
     """创建 API Key，仅管理员可执行。"""
 

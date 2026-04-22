@@ -66,7 +66,7 @@ class SecurityService:
 
 
 ROLE_PERMISSIONS: dict[Role, set[str]] = {
-    Role.SYSADMIN: {"*"},
+    Role.SYSADMIN: {"*", "security:manage"},
     Role.ADMIN: {
         "catalog:write",
         "catalog:read",
@@ -78,6 +78,7 @@ ROLE_PERMISSIONS: dict[Role, set[str]] = {
     Role.PACKER: {
         "order:create",
         "order:read",
+        "catalog:read",
         "packing:run",
         "template:read",
         "template:write",
