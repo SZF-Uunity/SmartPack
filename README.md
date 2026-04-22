@@ -38,6 +38,7 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 - OpenAPI 文档：http://127.0.0.1:8000/docs
 - 健康检查：http://127.0.0.1:8000/health
+- 企业控制台：http://127.0.0.1:8000/app
 
 ## 4. 企业级架构说明
 
@@ -57,6 +58,20 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 2. **策略引擎化装箱**：三策略评分函数隔离，便于后续接入 OR-Tools/遗传算法。
 3. **安全可插拔**：当前内存限流实现可平滑替换 Redis/Gateway。
 4. **审计链路**：操作级审计日志模型，可对接 ELK/SIEM。
+
+
+## 4.2 企业前端控制台（新增）
+
+- 访问地址：`/app`
+- 前端采用原生 ES Modules 分层：`app.js`（编排）+ `api.js`（API 客户端）+ `state.js`（状态）+ `logger.js`（日志）。
+- 内置功能：
+  - API Key / 角色上下文保存（本地持久化）
+  - AI 商品描述解析
+  - 订单创建
+  - 装箱方案计算
+  - 前端链路中文日志展示
+
+> 说明：当前前端是可演进的“企业控制台基础版”，后续可无缝替换为 React/Vue 构建产物并继续复用后端 API。
 
 ## 5. 关键业务规则落地点
 

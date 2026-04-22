@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartPack 企业控制台</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>SmartPack 企业级智能包装控制台</h1>
+      <p>面向打包员 / 管理员的一体化操作界面（演进版）</p>
+    </header>
+
+    <main class="layout">
+      <aside class="panel auth-panel">
+        <h2>鉴权上下文</h2>
+        <label>API Key
+          <input id="apiKey" placeholder="请输入 API Key" />
+        </label>
+        <label>角色
+          <select id="userRole">
+            <option value="admin">admin</option>
+            <option value="packer" selected>packer</option>
+            <option value="sysadmin">sysadmin</option>
+            <option value="customer_user">customer_user</option>
+          </select>
+        </label>
+        <button id="saveAuth">保存上下文</button>
+      </aside>
+
+      <section class="panel">
+        <h2>AI 辅助建品</h2>
+        <textarea id="aiDescription" rows="4" placeholder="例如：玻璃杯 10x12x15cm 2kg 易碎"></textarea>
+        <button id="extractBtn">解析商品描述</button>
+        <pre id="aiResult" class="result-box"></pre>
+      </section>
+
+      <section class="panel">
+        <h2>订单与方案</h2>
+        <div class="grid-2">
+          <label>客户ID<input id="customerId" type="number" value="1" /></label>
+          <label>产品ID<input id="productId" type="number" value="1" /></label>
+          <label>数量<input id="quantity" type="number" value="1" /></label>
+          <button id="createOrderBtn">创建订单</button>
+        </div>
+        <div class="grid-2">
+          <label>订单ID<input id="orderId" type="number" value="1" /></label>
+          <button id="calcPlanBtn">计算装箱方案</button>
+        </div>
+        <pre id="planResult" class="result-box"></pre>
+      </section>
+
+      <section class="panel">
+        <h2>系统日志</h2>
+        <div id="logBox" class="log-box"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>

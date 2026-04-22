@@ -1,0 +1,93 @@
+/*
+ * 企业控制台样式：保持清晰、轻量、可扩展。
+ * 采用卡片化布局，后续新增模块时可直接复用 panel/grid 规范。
+ */
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --line: #dce3ef;
+  --text: #1f2a44;
+  --primary: #2563eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  background: #0f172a;
+  color: #fff;
+  padding: 20px 24px;
+}
+
+.topbar h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+input,
+select,
+textarea,
+button {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.92;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.result-box,
+.log-box {
+  background: #0b1020;
+  color: #e2e8f0;
+  border-radius: 8px;
+  min-height: 150px;
+  padding: 10px;
+  overflow: auto;
+  font-size: 12px;
+}

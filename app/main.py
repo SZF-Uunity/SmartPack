@@ -3,9 +3,11 @@
 import logging
 import time
 import uuid
+from pathlib import Path
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.routes import router
 from app.core.config import settings
@@ -16,8 +18,13 @@ from app.db.session import Base, engine
 setup_logging()
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title=settings.app_name, version="1.0.0")
+app = FastAPI(title=settings.app_name, version="1.1.0")
 app.include_router(router, prefix="/api/v1", tags=["smartpack"])
+
+# 前端静态资源目录，采用模块化组织便于后续替换为 React/Vue 构建产物。
+FRONTEND_DIR = Path(__file__).resolve().parent / "frontend"
+STATIC_DIR = FRONTEND_DIR / "assets"
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.middleware("http")
@@ -51,8 +58,16 @@ def on_startup() -> None:
     logger.info("系统启动完成：数据库表已就绪")
 
 
+@app.get("/app")
+def serve_console() -> FileResponse:
+    """返回前端控制台页面。"""
+
+    logger.info("前端链路：访问企业控制台页面")
+    return FileResponse(FRONTEND_DIR / "index.html")
+
+
 @app.get("/health")
 def health_check() -> dict:
     """健康检查接口。"""
 
-    return {"status": "ok", "version": "1.0.0"}
+    return {"status": "ok", "version": "1.1.0"}
